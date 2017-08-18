@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -14,9 +15,9 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/8/15.
  */
-@Repository
-public class PersonRepository {
-    @Autowired
+//@Repository
+public interface PersonRepository extends ReactiveMongoRepository<Person,String>{
+   /** @Autowired
     private MongoTemplate mongoTemplate;
 
     public Flux<Person> findAll(){
@@ -39,4 +40,9 @@ public class PersonRepository {
         Query query = Query.query(Criteria.where("id").is(id));
         return Mono.justOrEmpty(mongoTemplate.findAndRemove(query,Person.class));
     }
+   **/
+
+   Mono<Person> findByName(String name);
+
+   Mono<Void>
 }

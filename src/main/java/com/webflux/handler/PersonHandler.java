@@ -36,7 +36,7 @@ public class PersonHandler {
     }
 
     public Mono<ServerResponse> delete(ServerRequest request){
-        Mono<Person> person = personRepository.delete(request.pathVariable("id"));
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(person,Person.class);
+        Mono<Void> person = personRepository.deleteById(request.pathVariable("id"));
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(person,Void.class);
     }
 }
